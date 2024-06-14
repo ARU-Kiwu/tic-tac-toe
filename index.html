@@ -7,9 +7,44 @@
     <link rel="stylesheet" href="assets/styles/styles.css">
 </head>
 <body>
-    <div class="container">
-        
+    <div class="mainscreen">
+        <h1>TIC TAC TOE</h1>
+        <div>
+            <div class="form-group">
+                <label for="player1">
+                    <span id="player1Name">Player 1</span>
+                    <input type="text" id="player1">
+                    <input type="color" name="player1Color" id="player1Color" value="#ffff00">
+                </label>
+            </div>
+            <div class="form-group">
+                <label for="player2">
+                    <span id="player2Name">Player 2</span>
+                    <input type="text" id="player2">
+                    <input type="color" name="player2Color" id="player2Color" value="#ff00ff">
+                </label>
+            </div>
+        </div>
+        <button role="button">Start</button>
     </div>
-    <scipt src="assets/scripts/main.js"></scipt>
+    <div class="playscreen">
+        <div class="header">
+            <div>
+                <span>
+                    player 1
+                </span>
+                <p id="player1Score">0</p>
+            </div>
+            <div>
+                <span>
+                    player 1
+                </span>
+                <p id="player2Score">0</p>
+            </div>
+        </div>
+        <div class="container">
+        </div>
+    </div>
+    <script src="assets/scripts/main.js"></script>
 </body>
 </html>
