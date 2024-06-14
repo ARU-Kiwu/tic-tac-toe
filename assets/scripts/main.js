@@ -23,9 +23,9 @@ const Gameboard = (function (){
             if(gameboard[a] && gameboard[a] === gameboard[b] && gameboard[b] === gameboard[c]) {
                 game.gameOverSound.play()
                 game.gameOver = true
-                game.players[currentPlayer].score
+                game.addScore(currentPlayer)
+                game.handleScore()
                 game.setGameOver()
-                
             } 
         } 
     }
@@ -98,6 +98,7 @@ const game = (function(){
     const xSound = new Audio('./assets/x-sound.ogg')
     const gameRestartSound = new Audio('./assets/gameover.ogg')
     const gameOverSound = new Audio('./assets/someone-won.ogg')
+
     let currentPlayer = 1;
     let gameOver = false;
     const setGameOver = () => {
@@ -114,19 +115,20 @@ const game = (function(){
     };
     const getCurrentPlayer = () => currentPlayer = currentPlayer === 0 ? 1 : 0;
 
-    const createPlayers = function(name, mark, sound, color){
+    
+    const createPlayers = function(name, mark, sound, score){
         return {
             name, 
             mark,
             sound,
-            color,
             score,
         }
     }
+    const player1Name = document.querySelector('#player1')
+    const player2Name = document.querySelector('#player2')
+    const player1 = createPlayers(player1Name.value, 'X', xSound, 0)
+    const player2 = createPlayers(player2Name.value, 'O', oSound, 0)
     
-    const player1 = document.querySelector('#player1')
-    const player2 = document.querySelector('#player2')
-
     let color1 = '#ff00ff';
     let color2 = '#ffff00';
 
@@ -142,14 +144,28 @@ const game = (function(){
         document.documentElement.style.setProperty("--o-color", `${color2}`)      
     })
 
-    players = [createPlayers(player1.value, 'X', xSound), createPlayers(player2.value, 'O', oSound)]
-    
-    const handleScore = (()=> {
+    const addScore = (currentPlayer) => currentPlayer.score++
+    players = [player1, player2]
+    const handleScore = ()=> {
         const player1Score = document.querySelector('#player1Score')
-        player1Score.innerHTML = players[0].score
+        player1Score.innerHTML = player1.score
         const player2Score = document.querySelector('#player2Score')
-        player2Score.innerHTML = players[1].score
-    })();
+        player2Score.innerHTML = player2.score
+    };
+
+    const handleNames = (()=> {
+        const player1NameDisplay = document.querySelector('#player1NameDisplay')
+        player1NameDisplay.innerHTML = (player1Name.value).toString()
+        const player2NameDisplay = document.querySelector('#player2NameDisplay')
+        player2NameDisplay.innerHTML = (player2Name.value).toString()
+        if(player1Name.value === '') {
+            player1NameDisplay.innerHTML = 'Player 1'
+            if(player2Name.value === '') {
+                player2NameDisplay.innerHTML = 'Player 2'
+            }
+        } 
+    });
+    
     return {
         currentPlayer,
         getCurrentPlayer,
@@ -158,6 +174,14 @@ const game = (function(){
         gameRestartSound,
         gameOver, 
         players,
-        handleScore
+        handleScore,
+        addScore,
+        handleNames
     }
 })();
+
+startButton.addEventListener('click', ()=>{
+    game.handleNames()
+    mainscreen.style.display = 'none'
+    playscreen.style.display = 'flex'
+}) 

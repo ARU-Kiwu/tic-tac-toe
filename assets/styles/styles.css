@@ -134,7 +134,7 @@ input[type="color"] {
     background-color: #535353;
   }
 
-  .mainscreen {
+  #mainscreen {
     display: flex;
     flex-direction: column;
     gap:10px
@@ -153,6 +153,11 @@ input[type="color"] {
 
   .header div:first-of-type {
     flex:1 1 auto;
+  }
+
+  #playscreen {
+    display: none;
+    flex-direction: column;
   }
 @keyframes entrance {
     0%{

@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="assets/styles/styles.css">
 </head>
 <body>
-    <div class="mainscreen">
+    <div id="mainscreen">
         <h1>TIC TAC TOE</h1>
         <div>
             <div class="form-group">
@@ -25,20 +25,20 @@
                 </label>
             </div>
         </div>
-        <button role="button">Start</button>
+        <button role="button" id="startButton">Start</button>
     </div>
-    <div class="playscreen">
+    <div id="playscreen">
         <div class="header">
             <div>
-                <span>
+                <span id="player1NameDisplay">
                     player 1
-                </span>
+                </span>-
                 <p id="player1Score">0</p>
             </div>
             <div>
-                <span>
+                <span id="player2NameDisplay">
                     player 1
-                </span>
+                </span>-
                 <p id="player2Score">0</p>
             </div>
         </div>
